@@ -18,37 +18,34 @@
     }
 
     body {
-    position: justify;
-    font-family: 'Segoe UI', sans-serif;
-    color: var(--text-light);
-    text-align: center;
-    overflow-x: hidden;
-}
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text-light);
+      text-align: center;
+      overflow-x: hidden;
+    }
+
     body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    filter: blur(5px) brightness(0.6);
-    z-index: -2;
-}
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(5px) brightness(0.6);
+      z-index: -2;
+    }
 
     body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2); /* Leve camada escura translúcida */
-    z-index: -1;
-}
-    audio {
-      display: none;
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: -1;
     }
 
     .hearts {
@@ -82,12 +79,13 @@
     }
 
     .carousel {
-      margin: 60px auto;
+      margin: 60px auto 20px;
       width: 80%;
-      max-width: 600px;
+      max-width: 500px;
+      max-height: 950px;
       overflow: hidden;
       border-radius: 20px;
-      border: 4px solid var(--serenity);
+      border: 5px solid var(--serenity);
       z-index: 2;
       position: relative;
     }
@@ -136,13 +134,44 @@
       z-index: 2;
       position: relative;
     }
+
+    #playMusic {
+      margin-top: 15px;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      background-color: var(--serenity);
+      color: white;
+      cursor: pointer;
+      z-index: 2;
+      position: relative;
+      animation: pulse 1.5s infinite;
+      transition: background-color 0.3s ease;
+    }
+
+    #playMusic:hover {
+      background-color: #7d91bf;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(146, 168, 209, 0.7);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(146, 168, 209, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(146, 168, 209, 0);
+      }
+    }
   </style>
 </head>
 <body>
-  <audio autoplay loop>
-    <source src="sua-musica-romantica.mp3" type="audio/mp3">
-  </audio>
-
   <div class="hearts"></div>
 
   <div class="carousel">
@@ -153,6 +182,13 @@
       <img src="foto4.jpg" alt="Foto 4">
     </div>
   </div>
+
+  <!-- Botão para tocar música -->
+  <button id="playMusic">Tocar nossa música 💖</button>
+  <audio id="loveSong" loop>
+    <source src="sua-musica-romantica.mp3" type="audio/mp3">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
 
   <h1>Eu te amo</h1>
 
@@ -191,6 +227,13 @@
 
       counter.innerHTML = `Sou apaixonado por você há <strong>${years}</strong> anos, <strong>${days}</strong> dias, <strong>${hours}</strong> horas, <strong>${minutes}</strong> minutos e <strong>${seconds}</strong> segundos.`;
     }, 1000);
+
+    // Música com interação
+    document.getElementById("playMusic").addEventListener("click", function () {
+      const audio = document.getElementById("loveSong");
+      audio.play();
+      this.style.display = "none";
+    });
   </script>
 </body>
 </html>
