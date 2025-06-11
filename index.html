@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Meu Amor</title>
+  <style>
+    :root {
+      --serenity: #92a8d1;
+      --violet: #ff0000;
+      --text-light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+    position: justify;
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--text-light);
+    text-align: center;
+    overflow-x: hidden;
+}
+    body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(5px) brightness(0.6);
+    z-index: -2;
+}
+
+    body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Leve camada escura translúcida */
+    z-index: -1;
+}
+    audio {
+      display: none;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      clip-path: polygon(50% 0%, 61% 18%, 80% 18%, 100% 37%, 100% 60%, 80% 80%, 50% 100%, 20% 80%, 0% 60%, 0% 37%, 20% 18%, 39% 18%);
+      animation: fall 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    .carousel {
+      margin: 60px auto;
+      width: 80%;
+      max-width: 600px;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 4px solid var(--serenity);
+      z-index: 2;
+      position: relative;
+    }
+
+    .carousel-images {
+      display: flex;
+      width: 100%;
+      animation: slide 20s infinite;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    @keyframes slide {
+      0% {transform: translateX(0);}
+      25% {transform: translateX(-100%);}
+      50% {transform: translateX(-200%);}
+      75% {transform: translateX(-300%);}
+      100% {transform: translateX(0);}
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 30px;
+      color: var(--violet);
+      z-index: 2;
+      position: relative;
+    }
+
+    #counter {
+      font-size: 1.5em;
+      margin: 20px 0;
+      z-index: 2;
+      position: relative;
+    }
+
+    .love-text {
+      font-size: 1.2em;
+      padding: 0 20px;
+      margin-top: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 2;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="sua-musica-romantica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <div class="hearts"></div>
+
+  <div class="carousel">
+    <div class="carousel-images">
+      <img src="foto1.jpg" alt="Foto 1">
+      <img src="foto2.jpg" alt="Foto 2">
+      <img src="foto3.jpg" alt="Foto 3">
+      <img src="foto4.jpg" alt="Foto 4">
+    </div>
+  </div>
+
+  <h1>Eu te amo</h1>
+
+  <div id="counter"></div>
+
+  <div class="love-text">
+    <p>Meu amor, cada segundo desde aquele dia 4 de junho de 2022 às 14h é um presente. Você é minha alegria constante, meu sonho mais bonito, meu lar. Estar com você é como viver num campo de flores, onde tudo é cor, perfume e paz. Eu te amo com tudo o que sou e sempre vou amar.</p>
+  </div>
+
+  <script>
+    function createHearts() {
+      const heartsContainer = document.querySelector('.hearts');
+      for (let i = 0; i < 30; i++) {
+        let heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    createHearts();
+
+    const startDate = new Date("2022-06-04T14:00:00").getTime();
+    const counter = document.getElementById("counter");
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = now - startDate;
+
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+      const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      counter.innerHTML = `Sou apaixonado por você há <strong>${years}</strong> anos, <strong>${days}</strong> dias, <strong>${hours}</strong> horas, <strong>${minutes}</strong> minutos e <strong>${seconds}</strong> segundos.`;
+    }, 1000);
+  </script>
+</body>
+</html>
